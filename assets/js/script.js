@@ -1,4 +1,9 @@
 // Assignment code here
+// variable to hold different criteria
+var lowercase = "abcdefghijklmnopqrstuvwxyz";
+var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var numbers = "1234567890";
+var specialChar = "\"!#$%&()\'*+,-./:;<=>?@[\]^_`{|}~";
 
 // when generate btn is clicked -> prompt for criteria
 function generatePassword () {
@@ -12,18 +17,28 @@ function generatePassword () {
 
   } else {
 
-    // prompt for character types -> include lowercase? uppercase? numbers? special characters?
+    // alert user of selected password length
     window.alert("Password length is set to " + pwLength + " characters long.");
-    var pwCriteria = window.prompt("What is the required password criteria? Type LC for lowercase, UC for uppercase, NUM for numbers, and SC for special characers. To include more than one criteria type, separate each code with a space and a comma. For example, for uppercase, numbers, and special characters, you would type: UC, NUM, SC");
+
+    // prompt for character types -> include lowercase? uppercase? numbers? special characters?
+    var lcConfirm = window.confirm("Please define the password criteria. Are lowercase letters required?");
+    var ucConfirm = window.confirm("Are uppercase letters required?");
+    var numConfirm = window.confirm("Are numbers required?");
+    var scConfirm = window.confirm("Are special characters required?");
+
+    // create variable to hold user selected criteria and new password
+    var userCriteria = "";
+    var newPassword = "";
     
-    // make user input all uppercase for easier comparison
-    pwCriteria = pwCriteria.toUpperCase();
-    
-    // put user input into an array to index each criteria listed
-    pwCriteriaArr = pwCriteria.split(", ");
-    
-    for (var i = 0; i < pwCriteriaArr.length; i++) {
-      console.log(pwCriteriaArr[i]);
+    if (lcConfirm && ucConfirm && numConfirm && scConfirm) {
+      userCriteria = lowercase + uppercase + numbers + specialChar;
+
+      for (var i = 0, n = userCriteria.length; i < pwLength; i++) {
+        newPassword += userCriteria.charAt(Math.floor(Math.random() * n) + 1);
+      }
+      return newPassword;
+    } else {
+      console.log("not working/not ready yet");
     }
   }
 }
