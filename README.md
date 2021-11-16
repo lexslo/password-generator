@@ -13,5 +13,7 @@ a series of prompts for password criteria are presented to the user
 - When all prompts are answered a password is generated that matches the selected criteria
 - When the password is generated then the password is either displayed in an alert or written to the page
 
+### Layout
+![Screenshot of Password Generator](./assets/images/pw-gen-ss.png)
 ### Link
-https://lexslo.github.io/password-generator/
+[Password Generator](https://lexslo.github.io/password-generator/)
