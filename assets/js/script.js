@@ -1,4 +1,4 @@
-// variable to hold different criteria
+// variables to hold different criteria
 var lowercase = "abcdefghijklmnopqrstuvwxyz";
 var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var numbers = "1234567890";
@@ -19,35 +19,40 @@ function generatePassword () {
     // alert user of selected password length
     window.alert("Password length is set to " + pwLength + " characters long.");
 
-    // create variable to hold user selected criteria and new password
+    // declare variables to hold user selected criteria and new password
+    var lcConfirm;
+    var ucConfirm;
+    var numConfirm;
+    var scConfirm;
     var userCriteria = "";
     var newPassword = "";
 
-    // prompt for character types -> include lowercase? uppercase? numbers? special characters?
-    var lcConfirm = window.confirm("Please define the password criteria. Are lowercase letters required?");
-    var ucConfirm = window.confirm("Are uppercase letters required?");
-    var numConfirm = window.confirm("Are numbers required?");
-    var scConfirm = window.confirm("Are special characters required?");
+    // function to prompt for character types -> include lowercase? uppercase? numbers? special characters?
+    function getCriteria() {
 
-    // check if no criteria were selected
-    if (lcConfirm == false && ucConfirm == false && numConfirm == false && scConfirm == false) {
-      window.alert("NO CRITERIA SELECTED. PLEASE CONFIRM AT LEAST ONE PASSWORD CRITERIA TYPE.");
-
-      lcConfirm = window.confirm("Please define the password criteria. Are lowercase letters required?");
-      ucConfirm = window.confirm("Are uppercase letters required?");
-      numConfirm = window.confirm("Are numbers required?");
-      scConfirm = window.confirm("Are special characters required?");
+      lcConfirm = window.confirm("Please define the password criteria. Click OK for Yes and Cancel for No. Are lowercase letters required?");
+      ucConfirm = window.confirm("Are uppercase letters required? Click OK for Yes and Cancel for No.");
+      numConfirm = window.confirm("Are numbers required? Click OK for Yes and Cancel for No.");
+      scConfirm = window.confirm("Are special characters required? Click OK for Yes and Cancel for No.");
+      // check that at least one criteria was selected
+      if (lcConfirm == false && ucConfirm == false && numConfirm == false && scConfirm == false) {
+        window.alert("NO CRITERIA SELECTED. PLEASE CONFIRM AT LEAST ONE PASSWORD CRITERIA TYPE.");
+        // run prompts again if none were selected
+        getCriteria();  
+      }
     }
+
+    getCriteria();
 
     // check for confirmations and concat criteria if true
     if (lcConfirm) userCriteria = userCriteria.concat(lowercase);
     if (ucConfirm) userCriteria = userCriteria.concat(uppercase);
-    if (numConfirm) userCrieria = userCriteria.concat(numbers);
+    if (numConfirm) userCriteria = userCriteria.concat(numbers);
     if (scConfirm) userCriteria = userCriteria.concat(specialChar);
 
     // generate password after all prompts are answered
     for (var i = 0, n = userCriteria.length; i < pwLength; i++) {
-      newPassword += userCriteria.charAt(Math.floor(Math.random() * n) + 1);
+      newPassword += userCriteria.charAt(Math.floor(Math.random() * n));
     }
     return newPassword;
 
